@@ -1,0 +1,4 @@
+LIBRARY	"nvse_tgspy"
+EXPORTS
+NVSEPlugin_Query
+NVSEPlugin_Load

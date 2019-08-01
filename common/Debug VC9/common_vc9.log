@@ -1,0 +1,37 @@
+﻿  ITypes.cpp
+  ITimer.cpp
+  IThread.cpp
+  ITextParser.cpp
+  ISegmentStream.cpp
+  IReadWriteLock.cpp
+  IRangeMap.cpp
+  IPrefix.cpp
+  IPipeServer.cpp
+  IPipeClient.cpp
+  IObjectPool.cpp
+  IMutex.cpp
+  IMemPool.cpp
+  IInterlockedLong.cpp
+  IFileStream.cpp
+  IFIFO.cpp
+  IEvent.cpp
+  IErrors.cpp
+  IDynamicCreate.cpp
+  IDirectoryIterator.cpp
+  Generating Code...
+  Compiling...
+  IDebugLog.cpp
+  IDataStream.cpp
+  IDatabase.cpp
+  IConsole.cpp
+  IBufferStream.cpp
+  IArchive.cpp
+  Generating Code...
+IRangeMap.obj : warning LNK4221: no public symbols found; archive member will be inaccessible
+IPrefix.obj : warning LNK4221: no public symbols found; archive member will be inaccessible
+IObjectPool.obj : warning LNK4221: no public symbols found; archive member will be inaccessible
+IInterlockedLong.obj : warning LNK4221: no public symbols found; archive member will be inaccessible
+IDynamicCreate.obj : warning LNK4221: no public symbols found; archive member will be inaccessible
+IDatabase.obj : warning LNK4221: no public symbols found; archive member will be inaccessible
+IArchive.obj : warning LNK4221: no public symbols found; archive member will be inaccessible
+  common_vc9.vcxproj -> C:\falloutModding\nvse_plugin_carxt\common\Debug VC9\common_vc9.lib

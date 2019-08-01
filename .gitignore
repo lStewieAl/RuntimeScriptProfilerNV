@@ -1,0 +1,7 @@
+code/.vs
+code/Release
+code/Debug
+code/Debug NG
+code/*.db
+common/Release VC9
+desktop.ini
