@@ -1,8 +1,26 @@
 #include "internals.h"
 #include "nvse/nvse/GameOSDepend.h"
+#include <PluginAPI.h>
+#include "Configuration.h"
 
 void __fastcall MainLoopExecuteScriptsHook(void* processManager);
 void __stdcall DoScriptRunnerExecuteTimeElapsed(Script* ExecutingScript, float ElapsedTime);
+
+enum KeyState
+{
+	isHeld = 0x0,
+	isPressed = 0x1,
+	isDepressed = 0x2,
+	isChanged = 0x3,
+};
+
+bool GetDXKeyState(int key, KeyState state) {
+	return	(ThisStdCall(0xA24180, OSInputGlobals::GetSingleton(), key, state));
+}
+
+bool GetIsKeyTapped(int key) {
+	return GetDXKeyState(key, KeyState::isPressed);
+}
 
 _declspec(naked) void __fastcall ScriptRunnerExecuteTimeElapsedHook(void* scriptRunner, void* dummyEDX, Script* script)
 {
@@ -42,6 +60,8 @@ static bool			s_MainLoopExecuting = false;
 static bool			scriptWasExecutedThisFrame = false;
 void __stdcall DoScriptRunnerExecuteTimeElapsed(Script* ExecutingScript, float ElapsedTime)
 {
+	if (!isModEnabled) return;
+
 	if (ElapsedTime < 0.0000000000001) return;
 	if (GetCurrentThreadId() != (*g_osGlobals)->mainThreadID)
 		return;
@@ -67,6 +87,17 @@ LARGE_INTEGER FreqBuffer = { 0 };
 
 void __stdcall StartFrameExecutionTimer()
 {
+	if (GetIsKeyTapped(g_iToggleExecutionHotkey))
+	{
+		isModEnabled = !isModEnabled;
+		char* message = isModEnabled ? "Profiling Enabled" : "Profiling Disabled";
+		Console_Print(message);
+		if (bShowToggleMessage)
+		{
+			QueueUIMessage(message, eEmotion::happy, NULL, NULL, 1, false);
+		}
+	}
+
 	if (FreqBuffer.HighPart == 0)
 		QueryPerformanceFrequency(&FreqBuffer);
 

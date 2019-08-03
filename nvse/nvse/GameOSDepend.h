@@ -112,6 +112,7 @@ public:
 	UInt8		mouseBinds[kMaxControlBinds];		// 1BAC / 1BB0
 	UInt8		joystickBinds[kMaxControlBinds];	// 1BC8 / 1BCC
 	UInt32		unk1BE4[(0x1C00 - 0x1BE4) >> 2];	// 1BE4 / 1BE8
+	static OSInputGlobals* GetSingleton() { return *(OSInputGlobals * *)(0x11F35CC); }
 };
 
 #if FALLOUT_VERSION < FALLOUT_VERSION_1_1_35

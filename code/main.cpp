@@ -1,20 +1,18 @@
 #include "nvse/nvse/PluginAPI.h"
 #include "nvse/nvse/nvse_version.h"
 #include "nvse/nvse/SafeWrite.h"
-#include "Configuration.h"
 #include "internals.h"
+#include "Configuration.h"
 
 HMODULE rustHandle;
 IDebugLog  gLog("RuntimeScriptProfiler.log");
 
-void HandleIniOptions() {
-	char filename[MAX_PATH];
-	GetModuleFileNameA(rustHandle, filename, MAX_PATH);
-	strcpy((char*)(strrchr(filename, '\\') + 1), "RuntimeScriptProfiler.ini");
-	g_FilterFormID = GetPrivateProfileIntA("Main", "iFilterFormID", 0, filename);
-	g_FilterModID = GetPrivateProfileIntA("Main", "iFilterModID ", 0, filename);
-	g_SkipVanillaScripts = GetPrivateProfileIntA("Main", "bSkipVanillaScripts", 0, filename);
-}
+int  g_FilterFormID;
+int  g_FilterModID;
+int  g_SkipVanillaScripts;
+bool isModEnabled;
+int  g_iToggleExecutionHotkey;
+bool bShowToggleMessage;
 
 extern "C" {
 
